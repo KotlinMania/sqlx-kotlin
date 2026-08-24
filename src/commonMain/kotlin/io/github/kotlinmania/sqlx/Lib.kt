@@ -1,6 +1,13 @@
 // port-lint: source lib.rs
 package io.github.kotlinmania.sqlx
 
+/**
+ * SQLx library metadata.
+ */
+public object Sqlx {
+    public const val VERSION: String = "0.8.3"
+}
+
 // Callers migrated:
 // - prelude::Acquire -> io.github.kotlinmania.sqlx.Acquire
 // - prelude::ConnectOptions -> io.github.kotlinmania.sqlx.ConnectOptions

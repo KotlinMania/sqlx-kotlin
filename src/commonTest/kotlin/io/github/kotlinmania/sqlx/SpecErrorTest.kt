@@ -33,4 +33,3 @@ class SpecErrorTest {
         assertEquals("direct helper", err6.message)
     }
 }
-
