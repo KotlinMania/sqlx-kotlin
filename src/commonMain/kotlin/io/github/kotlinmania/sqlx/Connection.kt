@@ -4,14 +4,14 @@ package io.github.kotlinmania.sqlx
 /**
  * Options used to establish a new database connection.
  */
-public interface ConnectOptions<DB : Database> {
+public interface ConnectOptions<out DB : Database> {
     public suspend fun connect(): Connection<DB>
 }
 
 /**
  * Represents a single live connection to a database.
  */
-public interface Connection<DB : Database> : Executor<DB> {
+public interface Connection<out DB : Database> : Executor<DB> {
     public suspend fun close()
 
     public suspend fun ping()
@@ -22,20 +22,20 @@ public interface Connection<DB : Database> : Executor<DB> {
 /**
  * Manages transaction lifecycles for a database connection.
  */
-public interface TransactionManager<DB : Database> {
-    public suspend fun begin(connection: Connection<DB>)
+public interface TransactionManager<out DB : Database> {
+    public suspend fun begin(connection: Connection<@UnsafeVariance DB>)
 
-    public suspend fun commit(connection: Connection<DB>)
+    public suspend fun commit(connection: Connection<@UnsafeVariance DB>)
 
-    public suspend fun rollback(connection: Connection<DB>)
+    public suspend fun rollback(connection: Connection<@UnsafeVariance DB>)
 
-    public suspend fun startRollback(connection: Connection<DB>)
+    public suspend fun startRollback(connection: Connection<@UnsafeVariance DB>)
 }
 
 /**
  * An in-flight database transaction wrapper around a [Connection].
  */
-public interface Transaction<DB : Database> : Executor<DB> {
+public interface Transaction<out DB : Database> : Executor<DB> {
     public suspend fun commit()
 
     public suspend fun rollback()
@@ -44,7 +44,7 @@ public interface Transaction<DB : Database> : Executor<DB> {
 /**
  * A prepared or cached SQL statement.
  */
-public interface Statement<DB : Database> {
+public interface Statement<out DB : Database> {
     public fun sql(): String
 
     public fun columns(): List<Column<DB>>
@@ -53,7 +53,7 @@ public interface Statement<DB : Database> {
 /**
  * Schema and nullability description of a prepared SQL query.
  */
-public data class Describe<DB : Database>(
+public data class Describe<out DB : Database>(
     public val columns: List<Column<DB>>,
     public val nullable: List<Boolean?> = emptyList(),
 )

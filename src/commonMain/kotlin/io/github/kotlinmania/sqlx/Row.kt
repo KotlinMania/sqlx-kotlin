@@ -4,7 +4,7 @@ package io.github.kotlinmania.sqlx
 /**
  * Metadata for a single column in a query result set.
  */
-public interface Column<DB : Database> {
+public interface Column<out DB : Database> {
     public val ordinal: Int
     public val name: String
     public val typeInfo: TypeInfo
@@ -13,7 +13,7 @@ public interface Column<DB : Database> {
 /**
  * Basic column implementation.
  */
-public data class DefaultColumn<DB : Database>(
+public data class DefaultColumn<out DB : Database>(
     override val ordinal: Int,
     override val name: String,
     override val typeInfo: TypeInfo = SimpleTypeInfo("TEXT"),
@@ -29,12 +29,12 @@ public interface ColumnIndex<R> {
 /**
  * Represents a single row returned from a SQL query execution.
  */
-public interface Row<DB : Database> {
-    public fun columns(): List<Column<DB>>
+public interface Row<out DB : Database> {
+    public fun columns(): List<Column<Database>>
 
     public fun columnCount(): Int = columns().size
 
-    public fun column(index: Int): Column<DB> {
+    public fun column(index: Int): Column<Database> {
         val cols = columns()
         if (index < 0 || index >= cols.size) {
             throw SqlxException.ColumnIndexOutOfBounds(index, cols.size)
@@ -42,7 +42,7 @@ public interface Row<DB : Database> {
         return cols[index]
     }
 
-    public fun column(name: String): Column<DB> {
+    public fun column(name: String): Column<Database> {
         val cols = columns()
         return cols.find { it.name.equals(name, ignoreCase = true) }
             ?: throw SqlxException.ColumnNotFound(name)
@@ -68,6 +68,6 @@ public interface Row<DB : Database> {
 /**
  * Trait for types that can be constructed from a database row.
  */
-public fun interface FromRow<R, out T> {
+public fun interface FromRow<in R, out T> {
     public fun fromRow(row: R): T
 }

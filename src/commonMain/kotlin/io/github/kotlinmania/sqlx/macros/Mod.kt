@@ -16,7 +16,7 @@ import io.github.kotlinmania.sqlx.Row
 public fun <DB : Database> expandQuery(
     query: String,
     args: Arguments<DB> = DefaultArguments(),
-): Query<DB, Arguments<DB>> = Query(query, args)
+): Query<DB> = Query(query, args)
 
 /**
  * Expands a typed query mapped to a custom record struct.
@@ -25,7 +25,7 @@ public fun <DB : Database, O> expandQueryAs(
     query: String,
     fromRow: FromRow<Row<DB>, O>,
     args: Arguments<DB> = DefaultArguments(),
-): QueryAs<DB, O, Arguments<DB>> = QueryAs(Query(query, args), fromRow)
+): QueryAs<DB, O> = QueryAs(Query(query, args), fromRow)
 
 /**
  * Expands a scalar query returning a single column.
@@ -33,4 +33,4 @@ public fun <DB : Database, O> expandQueryAs(
 public fun <DB : Database, O> expandQueryScalar(
     query: String,
     args: Arguments<DB> = DefaultArguments(),
-): QueryScalar<DB, O, Arguments<DB>> = QueryScalar(Query(query, args))
+): QueryScalar<DB, O> = QueryScalar(Query(query, args))

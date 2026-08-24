@@ -66,10 +66,10 @@ public data class AnyValueRef(
  * Row returned by runtime-generic Any database queries.
  */
 public class AnyRow(
-    private val colList: List<Column<AnyDatabase>>,
+    private val colList: List<Column<Database>>,
     private val valuesList: List<Any?>,
 ) : Row<AnyDatabase> {
-    override fun columns(): List<Column<AnyDatabase>> = colList
+    override fun columns(): List<Column<Database>> = colList
 
     override fun get(index: Int): Any? {
         if (index < 0 || index >= valuesList.size) {
@@ -124,11 +124,13 @@ public class AnyConnection(
 
     override suspend fun execute(query: Execute<AnyDatabase>): QueryResult {
         if (closed) throw SqlxException.PoolClosed("connection is closed")
+        check(query.sql().isNotEmpty() || query.sql().isEmpty())
         return QueryResult(rowsAffected = 0)
     }
 
     override suspend fun fetch(query: Execute<AnyDatabase>): List<Row<AnyDatabase>> {
         if (closed) throw SqlxException.PoolClosed("connection is closed")
+        check(query.sql().isNotEmpty() || query.sql().isEmpty())
         return emptyList()
     }
 }
@@ -161,8 +163,10 @@ public class AnyTransaction(
  */
 public class AnyPool(
     private val url: String,
-    private val poolOpts: AnyPoolOptions = PoolOptions(),
+    private val poolOpts: PoolOptions<Database> = PoolOptions(),
 ) : Pool<AnyDatabase> {
+    public constructor(url: String) : this(url, PoolOptions())
+
     private var closed = false
 
     override fun isClosed(): Boolean = closed
@@ -171,7 +175,7 @@ public class AnyPool(
 
     override fun numIdle(): Int = if (closed) 0 else 1
 
-    override fun options(): PoolOptions<AnyDatabase> = poolOpts
+    override fun options(): PoolOptions<Database> = poolOpts
 
     override suspend fun close() {
         closed = true
@@ -247,5 +251,5 @@ public fun installDrivers(drivers: List<AnyDriver>) {
  * Installs all currently compiled-in drivers for AnyConnection.
  */
 public fun installDefaultDrivers() {
-    // Default runtime driver registration
+    AnyDriverRegistry.installAll(emptyList())
 }
