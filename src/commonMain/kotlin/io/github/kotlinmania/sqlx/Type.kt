@@ -28,28 +28,28 @@ public data class SimpleTypeInfo(
 /**
  * Maps a Kotlin type to a SQL database type.
  */
-public interface SqlType<DB : Database> {
+public interface SqlType<out DB : Database> {
     public fun typeInfo(): TypeInfo
 }
 
 /**
  * Encodes a Kotlin value into a database parameter representation.
  */
-public interface Encode<DB : Database> {
-    public fun encode(value: Any?, arguments: Arguments<DB>): IsNull
+public interface Encode<out DB : Database> {
+    public fun encode(value: Any?, arguments: Arguments<@UnsafeVariance DB>): IsNull
 }
 
 /**
  * Decodes a database value into a Kotlin instance of [T].
  */
-public interface Decode<DB : Database, out T> {
-    public fun decode(value: Value<DB>): T
+public interface Decode<out DB : Database, out T> {
+    public fun decode(value: Value<@UnsafeVariance DB>): T
 }
 
 /**
  * Represents a single scalar database value.
  */
-public interface Value<DB : Database> {
+public interface Value<out DB : Database> {
     public fun typeInfo(): TypeInfo
 
     public fun isNull(): Boolean
@@ -60,7 +60,7 @@ public interface Value<DB : Database> {
 /**
  * Represents a borrowed reference to a scalar database value.
  */
-public interface ValueRef<DB : Database> {
+public interface ValueRef<out DB : Database> {
     public fun typeInfo(): TypeInfo
 
     public fun isNull(): Boolean

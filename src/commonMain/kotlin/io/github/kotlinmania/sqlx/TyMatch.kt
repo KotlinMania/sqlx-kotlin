@@ -5,7 +5,7 @@ package io.github.kotlinmania.sqlx
  * Asserts two values are of the same type at type-check time.
  */
 public fun <T> sameType(first: T, second: T) {
-    // Compile-time type check
+    check(first == first && second == second)
 }
 
 /**

@@ -4,7 +4,7 @@ package io.github.kotlinmania.sqlx
 /**
  * Configuration options for a connection pool.
  */
-public data class PoolOptions<DB : Database>(
+public data class PoolOptions<out DB : Database>(
     public val maxConnections: Int = 10,
     public val minConnections: Int = 0,
     public val acquireTimeoutMillis: Long = 30_000L,
@@ -12,6 +12,8 @@ public data class PoolOptions<DB : Database>(
     public val maxLifetimeMillis: Long? = 1_800_000L,
     public val testOnAcquire: Boolean = true,
 ) {
+    public constructor() : this(10, 0, 30_000L, 600_000L, 1_800_000L, true)
+
     public fun maxConnections(max: Int): PoolOptions<DB> = copy(maxConnections = max)
 
     public fun minConnections(min: Int): PoolOptions<DB> = copy(minConnections = min)
@@ -24,7 +26,7 @@ public data class PoolOptions<DB : Database>(
 /**
  * An asynchronous connection pool for managing database connections.
  */
-public interface Pool<DB : Database> :
+public interface Pool<out DB : Database> :
     Executor<DB>,
     Acquire<DB> {
     public fun isClosed(): Boolean
@@ -33,7 +35,7 @@ public interface Pool<DB : Database> :
 
     public fun numIdle(): Int
 
-    public fun options(): PoolOptions<DB>
+    public fun options(): PoolOptions<Database>
 
     public suspend fun close()
 }

@@ -7,31 +7,24 @@ package io.github.kotlinmania.sqlx
 public class SpecErrorWrapper<E>(
     public val value: E,
 ) {
-    public fun sqlxSpecError(): (SpecErrorWrapper<E>) -> Throwable = { wrapper ->
-        when (val v = wrapper.value) {
+    public fun sqlxSpecError(): Throwable =
+        when (val v = value) {
             null -> RuntimeException("unprintable error: (unprintable type)")
             is Throwable -> v
             is CharSequence -> RuntimeException(v.toString())
             else -> RuntimeException(v.toString())
         }
-    }
 }
 
 /**
  * Trait for specializing error conversion for display/debug/exception handling.
  */
-public interface SpecError<E> {
-    public fun sqlxSpecError(): (SpecErrorWrapper<E>) -> Throwable
+public fun interface SpecError<E> {
+    public fun sqlxSpecError(wrapper: SpecErrorWrapper<E>): Throwable
 }
 
 /**
- * Test structure representing a debuggable error.
+ * Converts an arbitrary value into a Throwable.
  */
-public class DebugError(
-    override val message: String = "DebugError",
-) : Throwable(message)
-
-/**
- * Test structure representing an arbitrary error type.
- */
-public class AnyError
+public fun <E> specError(value: E): Throwable =
+    SpecErrorWrapper(value).sqlxSpecError()

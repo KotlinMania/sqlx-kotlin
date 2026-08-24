@@ -7,8 +7,9 @@ import io.github.kotlinmania.sqlx.AnyPool
 import io.github.kotlinmania.sqlx.installDefaultDrivers as rootInstallDefaultDrivers
 import io.github.kotlinmania.sqlx.installDrivers as rootInstallDrivers
 
-public typealias AnyPool = AnyPool
-public typealias AnyConnection = AnyConnection
+// Callers migrated:
+// - AnyPool -> io.github.kotlinmania.sqlx.AnyPool
+// - AnyConnection -> io.github.kotlinmania.sqlx.AnyConnection
 
 public fun installDefaultDrivers() {
     rootInstallDefaultDrivers()
