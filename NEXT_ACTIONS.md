@@ -6,9 +6,9 @@ Based on AST analysis, here are the concrete next steps.
 
 - **Files Present:** 5/5 (100.0%)
 - **Function parity:** 12/12 matched (target 130) — 100.0%
-- **Class/type parity:** 9/10 matched (target 82) — 90.0%
-- **Combined symbol parity:** 21/22 matched (target 212) — 95.5%
-- **Average inline-code cosine:** 0.17 (function body across 3 matched files)
+- **Class/type parity:** 10/10 matched (target 83) — 100.0%
+- **Combined symbol parity:** 22/22 matched (target 213) — 100.0%
+- **Average inline-code cosine:** 0.18 (function body across 3 matched files)
 - **Average documentation cosine:** 0.00 (doc text across 3 matched files)
 - **Cheat-zeroed Files:** 3
 - **Critical Issues:** 5 files with <0.60 function similarity
@@ -27,19 +27,7 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. spec_error
-
-- **Target:** `sqlx.SpecError`
-- **Similarity:** 0.10
-- **Dependents:** 0
-- **Priority Score:** 10609.0
-- **Functions:** 2/2 matched (target 4)
-- **Missing functions:** _none_
-- **Types:** 3/4 matched
-- **Missing types:** `SpecError`
-- **Tests:** 1/1 matched
-
-### 2. ty_match
+### 1. ty_match
 
 - **Target:** `sqlx.TyMatch`
 - **Similarity:** 0.43
@@ -50,6 +38,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 6/6 matched (target 7)
 - **Missing types:** _none_
 - **Tests:** 3/3 matched
+
+### 2. spec_error
+
+- **Target:** `sqlx.SpecError`
+- **Similarity:** 0.10
+- **Dependents:** 0
+- **Priority Score:** 609.0
+- **Functions:** 2/2 matched (target 4)
+- **Missing functions:** _none_
+- **Types:** 4/4 matched (target 5)
+- **Missing types:** _none_
+- **Tests:** 1/1 matched
 
 ### 3. any.mod
 

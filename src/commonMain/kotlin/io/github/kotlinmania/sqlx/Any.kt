@@ -124,13 +124,17 @@ public class AnyConnection(
 
     override suspend fun execute(query: Execute<AnyDatabase>): QueryResult {
         if (closed) throw SqlxException.PoolClosed("connection is closed")
-        check(query.sql().isNotEmpty() || query.sql().isEmpty())
+        if (query.sql().isEmpty()) {
+            return QueryResult(rowsAffected = 0)
+        }
         return QueryResult(rowsAffected = 0)
     }
 
     override suspend fun fetch(query: Execute<AnyDatabase>): List<Row<AnyDatabase>> {
         if (closed) throw SqlxException.PoolClosed("connection is closed")
-        check(query.sql().isNotEmpty() || query.sql().isEmpty())
+        if (query.sql().isEmpty()) {
+            return emptyList()
+        }
         return emptyList()
     }
 }

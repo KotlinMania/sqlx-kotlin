@@ -19,7 +19,7 @@ public class SpecErrorWrapper<E>(
 /**
  * Trait for specializing error conversion for display/debug/exception handling.
  */
-public fun interface SpecError<E> {
+public interface SpecError<E> {
     public fun sqlxSpecError(wrapper: SpecErrorWrapper<E>): Throwable
 }
 
