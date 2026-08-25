@@ -5,7 +5,9 @@ package io.github.kotlinmania.sqlx
  * Asserts two values are of the same type at type-check time.
  */
 public fun <T> sameType(first: T, second: T) {
-    check(first == first && second == second)
+    if (first != null || second != null) {
+        // Compile-time type verification
+    }
 }
 
 /**
@@ -66,8 +68,9 @@ public interface MatchBorrowExt<T> {
 /**
  * Placeholder value synthesizer for type resolution in query expansions.
  */
-@Suppress("UNCHECKED_CAST")
-public fun <T> conjureValue(): T = null as T
+public fun <T> conjureValue(): T {
+    throw UnsupportedOperationException("only for type resolution")
+}
 
 /**
  * Duplicate / identity placeholder for type resolution in query expansions.
