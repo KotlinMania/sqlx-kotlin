@@ -1,4 +1,4 @@
-// port-lint: tests spec_error.rs
+// port-lint: tests sqlx/src/spec_error.rs
 package io.github.kotlinmania.sqlx
 
 import kotlin.test.Test

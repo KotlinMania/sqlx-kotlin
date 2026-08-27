@@ -1,4 +1,4 @@
-// port-lint: source macros/mod.rs
+// port-lint: source sqlx/src/macros/mod.rs
 package io.github.kotlinmania.sqlx.macros
 
 import io.github.kotlinmania.sqlx.Arguments
