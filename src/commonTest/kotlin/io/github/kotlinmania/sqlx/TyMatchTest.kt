@@ -1,4 +1,4 @@
-// port-lint: tests sqlx/src/ty_match.rs
+// port-lint: tests ty_match.rs
 package io.github.kotlinmania.sqlx
 
 import kotlin.test.Test
