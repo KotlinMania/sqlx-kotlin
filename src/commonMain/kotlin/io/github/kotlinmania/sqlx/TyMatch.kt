@@ -68,9 +68,7 @@ public interface MatchBorrowExt<T> {
 /**
  * Placeholder value synthesizer for type resolution in query expansions.
  */
-public fun <T> conjureValue(): T {
-    throw UnsupportedOperationException("only for type resolution")
-}
+public fun <T> conjureValue(): T = throw UnsupportedOperationException("only for type resolution")
 
 /**
  * Duplicate / identity placeholder for type resolution in query expansions.
