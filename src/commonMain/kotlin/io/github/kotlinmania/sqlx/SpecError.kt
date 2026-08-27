@@ -1,4 +1,4 @@
-// port-lint: source sqlx/src/spec_error.rs
+// port-lint: source spec_error.rs
 package io.github.kotlinmania.sqlx
 
 /**
