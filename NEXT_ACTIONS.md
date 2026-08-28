@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 5/5 (100.0%)
-- **Function parity:** 12/12 matched (target 130) — 100.0%
-- **Class/type parity:** 10/10 matched (target 83) — 100.0%
-- **Combined symbol parity:** 22/22 matched (target 213) — 100.0%
+- **Function parity:** 11/11 matched (target 14) — 100.0%
+- **Class/type parity:** 10/10 matched (target 12) — 100.0%
+- **Combined symbol parity:** 21/21 matched (target 26) — 100.0%
 - **Average inline-code cosine:** 0.18 (function body across 3 matched files)
 - **Average documentation cosine:** 0.00 (doc text across 3 matched files)
-- **Cheat-zeroed Files:** 3
+- **Cheat-zeroed Files:** 0
 - **Critical Issues:** 5 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -51,39 +51,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 1/1 matched
 
-### 3. any.mod
-
-- **Target:** `sqlx.Any [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 110.0
-- **Functions:** 1/1 matched (target 34)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 15)
-- **Missing types:** _none_
-
-### 4. lib
-
-- **Target:** `sqlx.Lib [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 79)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 56)
-- **Missing types:** _none_
-
-### 5. macros.mod
-
-- **Target:** `macros.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 3)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched
-- **Missing types:** _none_
-
 ## Success Criteria
 
 For each file to be considered "complete":
@@ -92,4 +59,19 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `any.mod` | `sqlx.Any` | `any/mod` |
+| `lib` | `sqlx.Lib` | `lib` |
+| `macros.mod` | `macros.Mod` | `macros/mod` |
 
