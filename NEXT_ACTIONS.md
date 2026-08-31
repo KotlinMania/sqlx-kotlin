@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 5/5 (100.0%)
-- **Function parity:** 11/11 matched (target 14) — 100.0%
-- **Class/type parity:** 10/10 matched (target 12) — 100.0%
-- **Combined symbol parity:** 21/21 matched (target 26) — 100.0%
-- **Average inline-code cosine:** 0.18 (function body across 3 matched files)
-- **Average documentation cosine:** 0.00 (doc text across 3 matched files)
-- **Cheat-zeroed Files:** 0
+- **Files Present:** 5/53 (9.4%)
+- **Function parity:** 12/433 matched (target 51) — 2.8%
+- **Class/type parity:** 10/105 matched (target 27) — 9.5%
+- **Combined symbol parity:** 22/538 matched (target 78) — 4.1%
+- **Average inline-code cosine:** 0.26 (function body across 2 matched files)
+- **Average documentation cosine:** 0.00 (doc text across 2 matched files)
+- **Cheat-zeroed Files:** 2
 - **Critical Issues:** 5 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -27,7 +27,7 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. ty_match
+### 1. sqlx.ty_match
 
 - **Target:** `sqlx.TyMatch`
 - **Similarity:** 0.43
@@ -39,7 +39,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 3/3 matched
 
-### 2. spec_error
+### 2. sqlx.spec_error
 
 - **Target:** `sqlx.SpecError`
 - **Similarity:** 0.10
@@ -50,6 +50,28 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 4/4 matched (target 5)
 - **Missing types:** _none_
 - **Tests:** 1/1 matched
+
+### 3. any.mod
+
+- **Target:** `sqlx.Any [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 110.0
+- **Functions:** 1/1 matched (target 34)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 15)
+- **Missing types:** _none_
+
+### 4. macros.mod
+
+- **Target:** `macros.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 3)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
+- **Missing types:** _none_
 
 ## Success Criteria
 
@@ -71,7 +93,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `any.mod` | `sqlx.Any` | `any/mod` |
-| `lib` | `sqlx.Lib` | `lib` |
-| `macros.mod` | `macros.Mod` | `macros/mod` |
+| `sqlx.lib` | `sqlx.Lib` | `sqlx/src/lib` |
 

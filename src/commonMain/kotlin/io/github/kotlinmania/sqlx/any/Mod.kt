@@ -1,4 +1,4 @@
-// port-lint: source any/mod.rs
+// port-lint: source sqlx/src/any/mod.rs
 package io.github.kotlinmania.sqlx.any
 
 import io.github.kotlinmania.sqlx.AnyDriver

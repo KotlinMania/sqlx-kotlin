@@ -1,4 +1,4 @@
-// port-lint: source ty_match.rs
+// port-lint: source sqlx/src/ty_match.rs
 package io.github.kotlinmania.sqlx
 
 /**
