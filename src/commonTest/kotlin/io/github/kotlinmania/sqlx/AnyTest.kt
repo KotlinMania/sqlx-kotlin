@@ -1,4 +1,4 @@
-// port-lint: tests tests/any/any.rs
+// port-lint: tests sqlx/tests/any/any.rs
 package io.github.kotlinmania.sqlx
 
 import kotlin.test.Test
