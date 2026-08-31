@@ -2,7 +2,7 @@
   "type": "port",
   "name": "sqlx-kotlin",
   "source": {
-    "path": "tmp/sqlx/src",
+    "path": "tmp",
     "lang": "rust"
   },
   "target": {
