@@ -17,9 +17,15 @@
   },
   "reexport_modules": [
     "lib",
+    "lib.rs",
+    "sqlx/src/lib.rs",
     "macros/mod",
     "macros.mod",
+    "macros/mod.rs",
+    "sqlx/src/macros/mod.rs",
     "any/mod",
-    "any.mod"
+    "any.mod",
+    "any/mod.rs",
+    "sqlx/src/any/mod.rs"
   ]
 }
