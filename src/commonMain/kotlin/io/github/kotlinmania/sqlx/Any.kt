@@ -1,4 +1,3 @@
-// port-lint: source any/mod.rs
 package io.github.kotlinmania.sqlx
 
 /**
@@ -87,7 +86,6 @@ public class AnyRow(
     }
 }
 
-public typealias AnyQueryResult = QueryResult
 public typealias AnyArguments = DefaultArguments<AnyDatabase>
 public typealias AnyPoolOptions = PoolOptions<AnyDatabase>
 
